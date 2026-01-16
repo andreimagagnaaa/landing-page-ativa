@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #002B49;
+  --color-secondary: #EDF0F2;
+  --color-white: #FFFFFF;
+  --font-sans: 'Raleway', sans-serif;
+  --font-title: 'Barlow', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-primary);
+    background-color: var(--color-white);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-title);
+    font-weight: 700;
+  }
+
+  /* Safety Margin Enforcement */
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  @media (min-width: 768px) {
+    .container {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      padding-left: 8rem;
+      padding-right: 8rem;
+    }
+  }
+}
