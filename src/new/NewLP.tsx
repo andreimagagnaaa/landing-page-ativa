@@ -185,7 +185,7 @@ const Hero: React.FC = () => {
             >
               Maximize a eficiência do seu sistema MV
               <br />
-              <span className="text-secondary">e de perder receita.</span>
+              <span className="text-secondary">e pare de perder receita.</span>
             </motion.h1>
 
             <motion.p
