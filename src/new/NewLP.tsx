@@ -183,9 +183,9 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-title text-3xl md:text-4xl xl:text-5xl font-bold leading-tight mb-6"
             >
-              Seu sistema MV está instalado.
+              Maximize a eficiência do seu sistema MV
               <br />
-              <span className="text-secondary">A receita que ele deveria proteger, não.</span>
+              <span className="text-secondary">e de perder receita.</span>
             </motion.h1>
 
             <motion.p
