@@ -183,9 +183,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-title text-3xl md:text-4xl xl:text-5xl font-bold leading-tight mb-6"
             >
-              Maximize a eficiência do seu sistema MV
-              <br />
-              <span className="text-secondary">e pare de perder receita.</span>
+              Maximize a eficiência do seu sistema MV.
             </motion.h1>
 
             <motion.p
@@ -372,7 +370,7 @@ const painPoints = [
   {
     icon: TrendingDown,
     title: 'Glosas recorrentes e sem diagnóstico',
-    desc: 'Parametrização incorreta e regras fora do padrão geram glosas que se acumulam. Raramente são investigadas na raiz — e o sistema MV tem tudo para resolver isso.',
+    desc: 'Parametrização incorreta e regras fora do padrão geram glosas que se acumulam. Raramente são investigadas na raiz e o sistema MV tem tudo para resolver isso.',
   },
   {
     icon: Activity,
@@ -442,9 +440,9 @@ const Pain: React.FC = () => (
 const services = [
   {
     icon: TrendingDown,
-    badge: 'Porta de entrada',
+    badge: null,
     title: 'Revitalização do Ciclo de Receita',
-    desc: 'Auditoria end-to-end do faturamento: identificamos onde estão as glosas, por que acontecem e o que precisa ser corrigido — no sistema e no processo.',
+    desc: 'Auditoria end-to-end do faturamento: identificamos onde estão as glosas, por que acontecem e o que precisa ser corrigido no sistema e no processo.',
     items: [
       'Diagnóstico de gap de parametrização MV',
       'Redesenho do fluxo de faturamento',
@@ -456,7 +454,7 @@ const services = [
     icon: Shield,
     badge: null,
     title: 'Melhoria Contínua de Processos',
-    desc: 'Além de resolver chamados: entendemos a regra de negócio hospitalar dentro do MV e entregamos otimização mês a mês — não só suporte reativo.',
+    desc: 'Além de resolver chamados: entendemos a regra de negócio hospitalar dentro do MV e entregamos otimização mês a mês, não só suporte reativo.',
     items: [
       'Foco em regra de negócio, não só TI',
       'Ciclo mensal de otimização',
@@ -472,7 +470,7 @@ const services = [
     items: [
       'Indicadores personalizados para sua realidade',
       'Validação de fonte e dicionário de dados',
-      'Dashboards PowerBI / Qlik',
+      'Dashboards intuitivos',
     ],
     highlight: false,
   },
