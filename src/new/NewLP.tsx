@@ -133,7 +133,7 @@ const Header: React.FC = () => {
 interface HeroFormData {
   name: string;
   hospital: string;
-  role: string;
+  email: string;
   whatsapp: string;
 }
 
@@ -141,20 +141,16 @@ const Hero: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<HeroFormData>();
 
   const onSubmit = async (data: HeroFormData) => {
     await supabase.from('landing_leads').insert({
       name: data.name,
       hospital: data.hospital,
-      role: data.role,
+      email: data.email,
       whatsapp: data.whatsapp,
     });
-    const msg = encodeURIComponent(
-      `Olá! Sou ${data.name}, ${data.role} no ${data.hospital}. Gostaria de solicitar um diagnóstico de processos MV.`,
-    );
-    window.open(`https://wa.me/5511999999999?text=${msg}`, '_blank');
   };
 
   return (
@@ -255,10 +251,10 @@ const Hero: React.FC = () => {
           >
             {isSubmitSuccessful ? (
               <div className="text-center py-10">
-                <CheckCircle2 size={40} className="text-primary mx-auto mb-4" />
-                <h3 className="font-title text-xl font-bold mb-2">Redirecionando para WhatsApp</h3>
+                <CheckCircle2 size={40} className="text-green-500 mx-auto mb-4" />
+                <h3 className="font-title text-xl font-bold mb-2 text-primary">Solicitação recebida!</h3>
                 <p className="text-sm text-gray-500">
-                  Se não abriu automaticamente, verifique bloqueador de pop-ups.
+                  Em breve nossa equipe entrará em contato pelo WhatsApp informado.
                 </p>
               </div>
             ) : (
@@ -310,18 +306,22 @@ const Hero: React.FC = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-semibold text-primary mb-1.5">
-                        Cargo
+                        E-mail
                       </label>
                       <input
-                        {...register('role', { required: 'Campo obrigatório' })}
+                        {...register('email', {
+                          required: 'Campo obrigatório',
+                          pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'E-mail inválido' },
+                        })}
+                        type="email"
                         className={cn(
                           'w-full border rounded-lg px-4 py-3 text-sm text-primary focus:outline-none focus:ring-2 focus:ring-primary/20',
-                          errors.role ? 'border-red-400' : 'border-gray-200',
+                          errors.email ? 'border-red-400' : 'border-gray-200',
                         )}
-                        placeholder="Ex: Gerente"
+                        placeholder="seu@email.com"
                       />
-                      {errors.role && (
-                        <p className="text-xs text-red-500 mt-1">{errors.role.message}</p>
+                      {errors.email && (
+                        <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
                       )}
                     </div>
 
@@ -352,10 +352,11 @@ const Hero: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 text-sm mt-2"
+                    disabled={isSubmitting}
+                    className="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 text-sm mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Solicitar Diagnóstico Gratuito
-                    <ArrowRight size={16} />
+                    {isSubmitting ? 'Enviando...' : 'Solicitar Diagnóstico Gratuito'}
+                    {!isSubmitting && <ArrowRight size={16} />}
                   </button>
 
                   <p className="text-center text-xs text-gray-400">
