@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
+import { supabase } from '../lib/supabase';
 import {
   Shield,
   TrendingDown,
@@ -143,7 +144,13 @@ const Hero: React.FC = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm<HeroFormData>();
 
-  const onSubmit = (data: HeroFormData) => {
+  const onSubmit = async (data: HeroFormData) => {
+    await supabase.from('landing_leads').insert({
+      name: data.name,
+      hospital: data.hospital,
+      role: data.role,
+      whatsapp: data.whatsapp,
+    });
     const msg = encodeURIComponent(
       `Olá! Sou ${data.name}, ${data.role} no ${data.hospital}. Gostaria de solicitar um diagnóstico de processos MV.`,
     );
