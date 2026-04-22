@@ -145,17 +145,19 @@ const Hero: React.FC = () => {
   } = useForm<HeroFormData>();
 
   const onSubmit = async (data: HeroFormData) => {
-    await supabase
+    const { error } = await supabase
       .from('landing_leads')
-      .upsert(
-        {
-          name: data.name,
-          hospital: data.hospital,
-          email: data.email,
-          whatsapp: data.whatsapp,
-        },
-        { onConflict: 'email,whatsapp' },
-      );
+      .insert({
+        name: data.name,
+        hospital: data.hospital,
+        email: data.email,
+        whatsapp: data.whatsapp,
+      });
+    if (error && (error as any).code !== '23505') {
+      console.error('Erro ao salvar lead:', error);
+      return;
+    }
+    window.location.href = '/confirmacao.html';
   };
 
   return (
@@ -713,17 +715,19 @@ const CTA: React.FC = () => {
   } = useForm<CTAFormData>();
 
   const onSubmit = async (data: CTAFormData) => {
-    await supabase
+    const { error } = await supabase
       .from('landing_leads')
-      .upsert(
-        {
-          name: data.name,
-          hospital: data.hospital,
-          email: data.email,
-          whatsapp: data.whatsapp,
-        },
-        { onConflict: 'email,whatsapp' },
-      );
+      .insert({
+        name: data.name,
+        hospital: data.hospital,
+        email: data.email,
+        whatsapp: data.whatsapp,
+      });
+    if (error && (error as any).code !== '23505') {
+      console.error('Erro ao salvar lead:', error);
+      return;
+    }
+    window.location.href = '/confirmacao.html';
   };
 
   return (
